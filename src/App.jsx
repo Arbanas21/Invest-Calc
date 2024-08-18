@@ -12,12 +12,15 @@ function App() {
     expectedReturn: 6,
     duration: 10,
   })  
+
+  const inputIsValid = userInput.duration >= 1;
+
   function handleChange(inputIdentifier, newValue){
     return (
         setUserInput(prevUserInput => {
             return {
                 ...prevUserInput, 
-                [inputIdentifier]: newValue
+                [inputIdentifier]: +newValue
             }
         })
     )
@@ -27,7 +30,8 @@ function App() {
     <div>
       <Header />
       <UserInput userInput={userInput} onChange={handleChange}/>
-      <Results input={userInput} />
+      {!inputIsValid && <p className="center">Please enter valid input data</p>}
+      {inputIsValid && <Results input={userInput} />}
     </div>
     
   )
